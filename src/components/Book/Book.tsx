@@ -1,14 +1,9 @@
 import React from "react";
+import { BookType } from "../../types/types";
 
-type Props = {
-    id: string;
-    title: string;
-    author: string;
-    genre: string[];
-    url_image: string;
-}
+type Props = BookType;
 
-export const Book: React.FC<Props> = ({ id, title, author, genre, url_image }) => {
+export const Book: React.FC<Props> = ({ id, title, author, genre, url_image, isbn }) => {
     return (
         <div className="antialiased text-gray-900 ">
             <div className="p-2 flex items-center justify-center">
@@ -20,14 +15,14 @@ export const Book: React.FC<Props> = ({ id, title, author, genre, url_image }) =
                     />
                     <div className="p-6">
                         <div className="flex items-baseline">
-                            {genre.map((g) => (
+                            {genre ? genre.map((g) => (
                                 <span
                                     key={g}
                                     className="inline-block bg-gray-200 text-gray-800 py-1 px-2 mr-2 mb-2 text-xs rounded-full uppercase font-semibold tracking-wide"
                                 >
                                     {g}
                                 </span>
-                            ))}
+                            )) : null}
                         </div>
                         <h4 className="mt-2 font-semibold text-lg leading-tight truncate">
                             {title}
@@ -35,6 +30,10 @@ export const Book: React.FC<Props> = ({ id, title, author, genre, url_image }) =
 
                         <div className="mt-1">
                             <span>{author}</span>
+                        </div>
+
+                        <div className="mt-1">
+                            <span>{isbn}</span>
                         </div>
                     </div>
                 </div>

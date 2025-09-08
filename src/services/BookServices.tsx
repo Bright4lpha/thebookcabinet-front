@@ -12,3 +12,17 @@ export const getAllBooks = async (): Promise<BookType[]> => {
         throw error;
     }
 }
+
+export async function addBook(book: BookType): Promise<void> {
+    try {
+        const response = await axios.post<BookType>(API_BASE_URL, book, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        });
+    } catch (error) {
+        console.error('Error adding book:', error);
+        throw error;
+    }
+}

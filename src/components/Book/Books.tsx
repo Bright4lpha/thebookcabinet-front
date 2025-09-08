@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+
 import { Book } from "./Book";
 
 import { BookType } from "../../types/types";
-import { getAllBooks } from "../../services/BookServices";
+import { getAllBooks, addBook } from "../../services/BookServices";
+import AddBook from "./AddBook";
 
 export const Books = () => {
     const [books, setBooks] = useState<BookType[]>([]);
@@ -19,10 +21,21 @@ export const Books = () => {
         fetchBooks();
     }, [])
 
+    function newBook(title: string, author: string[], genre: string[], isbn: string, publisher: string, publishedDate: string, pages: number, language: string, description: string, imageURL: string): void {
+        const book: BookType = { title, author, genre, isbn, publisher, published_date: publishedDate, pages, language, description, url_image: imageURL };
+        addBook(book);
+    }
+
     return (
         <>
-            <div>
-                <h1 className="text-3xl font-bold underline">Bibliothèque</h1>
+            <div className="container mx-auto px-4 sm:px-8">
+                <div className="flex justify-between items-center mb-6">
+                    <h1 className="text-3xl font-bold underline">Bibliothèque</h1>
+                    <AddBook newBook={newBook} />
+                </div>
+
+
+
                 <div className="grid grid-cols-4 gap-y-6">
                     {
                         books.map(book => (
@@ -32,6 +45,7 @@ export const Books = () => {
                                 author={book.author}
                                 genre={book.genre}
                                 url_image={book.url_image}
+                                isbn={book.isbn}
                             />
                         ))
                     }
