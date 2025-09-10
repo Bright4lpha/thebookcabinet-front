@@ -15,3 +15,14 @@ export type BookType = {
 export type AddBookProps = {
     newBook: (title: string, author: string[], genre: string[], isbn: string, publisher: string, publishedDate: string, pages: number, language: string, description: string, imageURL: string) => void;
 };
+
+export type UserType = {
+    id?: string;
+    email: string;
+    password: string;
+    username?: string;
+};
+
+export type onLoginProps = {
+    onLogin: (email: string, password: string) => void;
+};

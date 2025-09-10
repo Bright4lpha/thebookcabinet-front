@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/esm/Button';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/esm/Form';
+import { Button, Form, Modal } from "react-bootstrap";
 import { AddBookProps } from '../../types/types';
-
 
 const AddBook: React.FC<AddBookProps> = (props) => {
 

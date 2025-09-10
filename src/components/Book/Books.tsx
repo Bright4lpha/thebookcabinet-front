@@ -28,7 +28,7 @@ export const Books = () => {
 
     return (
         <>
-            <div className="container mx-auto px-4 sm:px-8">
+            <div className="container px-4 sm:px-8">
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-3xl font-bold underline">Bibliothèque</h1>
                     <AddBook newBook={newBook} />
