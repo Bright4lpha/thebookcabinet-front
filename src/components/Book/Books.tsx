@@ -5,19 +5,26 @@ import { Book } from "./Book";
 import { BookType } from "../../types/types";
 import { getAllBooks, addBook } from "../../services/BookServices";
 import AddBook from "./AddBook";
+import { useNavigate } from "react-router";
 
 export const Books = () => {
     const [books, setBooks] = useState<BookType[]>([]);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchBooks = async () => {
             try {
+                if (!localStorage.getItem("authToken")) {
+                    navigate("/login");
+                    return;
+                }
                 const data = await getAllBooks();
                 setBooks(data);
             } catch (error) {
                 console.error("Error fetching books:", error);
             }
-        }
+        };
         fetchBooks();
     }, [])
 
@@ -37,9 +44,14 @@ export const Books = () => {
 
 
                 <div className="grid grid-cols-4 gap-y-6">
+
+                    {books && books.length === 0 && (
+                        <p>No books available.</p>
+                    )}
                     {
                         books.map(book => (
                             <Book
+                                key={book.id}
                                 id={book.id}
                                 title={book.title}
                                 author={book.author}
