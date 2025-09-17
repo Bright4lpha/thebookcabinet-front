@@ -20,7 +20,7 @@ export type UserType = {
     id?: string;
     email: string;
     password: string;
-    username?: string;
+    username: string;
 };
 
 export type onLoginProps = {

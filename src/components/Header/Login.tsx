@@ -1,9 +1,10 @@
 import Form from "react-bootstrap/esm/Form";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../../services/AuthServices";
+import { getMe, loginUser } from "../../services/AuthServices";
 import { useAuth } from "../../AuthProvider";
 import { Header } from "./Header";
+import { useUser } from "../../UserProvider";
 
 interface ILoginModel {
     email: string;
@@ -17,6 +18,7 @@ const Login = () => {
     });
 
     const { login } = useAuth()!;
+    const { setUser } = useUser()!;
     const navigate = useNavigate();
 
     const [message, setMessage] = React.useState<string>('');
@@ -33,6 +35,9 @@ const Login = () => {
         if (token) {
             login(token as string);
             // alert("User logged in successfully!");
+
+            setUser(await getMe());
+
             navigate("/library");
         } else {
             setMessage("Invalid email or password.");

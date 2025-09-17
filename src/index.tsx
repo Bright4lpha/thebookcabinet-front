@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from './AuthProvider';
+import { UserProvider } from './UserProvider';
 
 
 const root = createRoot(
@@ -14,7 +15,9 @@ const root = createRoot(
 root.render(
   <StrictMode>
     <AuthProvider>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </AuthProvider>
   </StrictMode>
 );

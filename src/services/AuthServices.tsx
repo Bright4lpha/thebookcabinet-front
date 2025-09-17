@@ -7,6 +7,21 @@ export type LoginResponse = {
     token: string;
 };
 
+export async function getMe(): Promise<UserType | null> {
+    try {
+        const response = await axios.get<UserType>(`${API_BASE_URL}/me`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("authToken")
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        return null;
+    }
+}
+
 export const registerUser = async (user: UserType): Promise<void> => {
     try {
         const response = await axios.post<UserType>(API_BASE_URL, user, {
